@@ -1,6 +1,8 @@
 defmodule Cluster.Strategy.PostgresTest do
   use ExUnit.Case
+
   import ExUnit.CaptureLog
+  alias Cluster.Strategy.State
 
   def connect(caller, result \\ true, node) do
     send(caller, {:connect, node})
@@ -19,7 +21,7 @@ defmodule Cluster.Strategy.PostgresTest do
   def start do
     start_supervised!({
       Cluster.Strategy.Postgres,
-      [
+      [%State{
         topology: [],
         connect: {__MODULE__, :connect, [self()]},
         disconnect: {__MODULE__, :disconnect, [self()]},
@@ -30,7 +32,7 @@ defmodule Cluster.Strategy.PostgresTest do
           username: "libcluster_postgres",
           password: "libcluster_postgres"
         ]
-      ]
+      }]
     })
   end
 

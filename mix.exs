@@ -27,7 +27,7 @@ defmodule LibclusterPostgres.MixProject do
 
   defp deps do
     [
-      {:libcluster, "~> 2.0"},
+      {:libcluster, "~> 3.0"},
       {:postgrex, "~> 0.13"}
     ]
   end
